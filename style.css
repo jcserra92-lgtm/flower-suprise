@@ -1,0 +1,169 @@
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(ellipse at bottom, #011627 0%, #000 100%);
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+}
+
+/* 🌌 Fireflies */
+.sky {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.firefly {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, #fffacd, transparent 70%);
+  border-radius: 50%;
+  animation: moveFirefly 12s linear infinite;
+  opacity: 0.8;
+}
+
+.firefly:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+.firefly:nth-child(2) { top: 50%; left: 70%; animation-delay: 2s; }
+.firefly:nth-child(3) { top: 80%; left: 30%; animation-delay: 4s; }
+.firefly:nth-child(4) { top: 40%; left: 80%; animation-delay: 6s; }
+.firefly:nth-child(5) { top: 60%; left: 20%; animation-delay: 8s; }
+
+@keyframes moveFirefly {
+  0% { transform: translate(0, 0); opacity: 0.8; }
+  50% { transform: translate(50px, -30px); opacity: 1; }
+  100% { transform: translate(-30px, 40px); opacity: 0.7; }
+}
+
+/* 🌿 Flower container */
+.flower {
+  position: relative;
+  width: 200px;
+  height: 300px;
+  z-index: 2;
+}
+
+/* 🌱 Stem */
+.stem {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 6px;
+  height: 0;
+  background: linear-gradient(to bottom, #1abc9c, #16a085);
+  border-radius: 5px;
+  transform: translateX(-50%);
+  animation: growStem 2.5s ease-in-out forwards;
+}
+
+/* 🌼 Center */
+.center {
+  position: absolute;
+  bottom: 200px;
+  left: 50%;
+  width: 50px;
+  height: 50px;
+  background: radial-gradient(circle, #fff59d, #fdd835);
+  border-radius: 50%;
+  transform: translate(-50%, 50%) scale(0);
+  box-shadow: 0 0 25px 10px rgba(255, 255, 150, 0.4);
+  animation: popCenter 1.2s ease-out 2.6s forwards, glow 3s ease-in-out 4s infinite alternate;
+  z-index: 3;
+}
+
+/* 🌸 Petals */
+.petal {
+  position: absolute;
+  bottom: 200px;
+  left: 50%;
+  width: 70px;
+  height: 110px;
+  background: radial-gradient(circle at 30% 30%, #ffb6c1, #ff69b4);
+  border-radius: 50px 50px 0 0;
+  transform-origin: bottom center;
+  opacity: 0;
+  transform: translateX(-50%) scale(0) rotate(0deg);
+  animation: bloomRotate 1.3s ease-out forwards;
+  z-index: 2;
+}
+
+.p1 { --angle: 0deg;   animation-delay: 3.1s; }
+.p2 { --angle: 60deg;  animation-delay: 3.3s; }
+.p3 { --angle: 120deg; animation-delay: 3.5s; }
+.p4 { --angle: 180deg; animation-delay: 3.7s; }
+.p5 { --angle: 240deg; animation-delay: 3.9s; }
+.p6 { --angle: 300deg; animation-delay: 4.1s; }
+
+/* 💬 Message */
+.message {
+  text-align: center;
+  margin-top: 40px;
+  opacity: 0;
+  animation: showMessage 2s ease-in 6s forwards;
+  z-index: 3;
+}
+
+.message h2 {
+  font-size: 2rem;
+  color: #ffd54f;
+  margin-bottom: 10px;
+}
+
+.message p {
+  font-size: 1.1rem;
+  color: #fff;
+  max-width: 600px;
+}
+
+/* ✨ Animations */
+@keyframes growStem {
+  from { height: 0; }
+  to { height: 200px; }
+}
+
+@keyframes popCenter {
+  to { transform: translate(-50%, 50%) scale(1); }
+}
+
+@keyframes bloomRotate {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0) rotate(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1) rotate(var(--angle));
+  }
+}
+
+@keyframes showMessage {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 25px 10px rgba(255, 255, 150, 0.4); }
+  to { box-shadow: 0 0 35px 15px rgba(255, 255, 200, 0.6); }
+}
+
+/* 📱 Mobile adjustments */
+@media (max-width: 600px) {
+  .center {
+    bottom: 26vh;
+    width: 60px;
+    height: 60px;
+  }
+  .stem { width: 4px; }
+  .message {
+    bottom: 35%;
+    font-size: 1.3rem;
+    padding: 0 10px;
+  }
+}
